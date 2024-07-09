@@ -232,7 +232,7 @@ header img {
   background-color: white;
 }
 
-.currentButton {
+.button:focus {
   color: white;
   background-color: #1d6154;
 }
