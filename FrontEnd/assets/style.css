@@ -174,6 +174,14 @@ nav li {
   font-size: 1.2em;
 }
 
+nav .li-weight {
+  font-weight: 600;
+}
+
+nav img {
+  width: 20px;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -181,10 +189,6 @@ a {
 
 a:hover {
   color: #b1663c;
-}
-
-header img {
-  width: 20px;
 }
 
 #introduction {
@@ -232,7 +236,7 @@ header img {
   background-color: white;
 }
 
-.button:focus {
+.buttonSelected {
   color: white;
   background-color: #1d6154;
 }
@@ -250,7 +254,7 @@ header img {
 }
 #contact,
 #login {
-  width: 50%;
+  width: 35%;
   margin: auto;
 }
 #contact > *,
@@ -300,6 +304,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  cursor: pointer;
 }
 
 footer nav ul {
