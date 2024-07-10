@@ -56,9 +56,19 @@ for (let i = 0; i < categories.length; i++) {
 
 const btnFilters = document.querySelectorAll(".filters .button");
 
+// Au clic de chaque bouton
+
 btnFilters.forEach((btnFilter) => {
   btnFilter.addEventListener("click", (event) => {
     const categoryId = event.target.id;
+
+    btnFilters.forEach((btn) => {
+      btn.classList.remove("buttonSelected");
+    });
+
+    // Ajouter la classe 'buttonSelected' au bouton cliqué
+    event.target.classList.add("buttonSelected");
+
     if (categoryId != 0) {
       const projetFiltre = works.filter(function (work) {
         return work.categoryId == categoryId;
