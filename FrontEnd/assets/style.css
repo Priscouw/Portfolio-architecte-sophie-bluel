@@ -139,6 +139,7 @@ header {
   justify-content: space-between;
   margin: 50px 0;
 }
+
 section {
   margin: 50px 0;
 }
@@ -233,7 +234,7 @@ a:hover {
   border-radius: 60px;
   border: #1d6154 1px solid;
   color: #1d6154;
-  background-color: white;
+  background-color: transparent;
 }
 
 .buttonSelected {
