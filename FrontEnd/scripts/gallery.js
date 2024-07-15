@@ -1,3 +1,7 @@
+// Variables globales
+const divGallery = document.querySelector(".gallery");
+const filters = document.querySelector(".filters");
+
 // Récupération des projets
 async function init() {
   try {
@@ -6,8 +10,6 @@ async function init() {
     );
 
     // Boucle qui créer les éléments dans la div .gallery
-
-    const divGallery = document.querySelector(".gallery");
 
     function genererProjet(projet) {
       for (let i = 0; i < projet.length; i++) {
@@ -36,8 +38,6 @@ async function init() {
       (categories) => categories.json()
     );
     // boutons filtres
-
-    const filters = document.querySelector(".filters");
 
     for (let i = 0; i < categories.length; i++) {
       const btn = document.createElement("button");
@@ -79,3 +79,27 @@ async function init() {
 }
 
 init();
+
+// Récupération du token
+
+const tokenSave = localStorage.getItem("token");
+
+const buttonLogin = document.querySelector(".login");
+const bannerEdition = document.querySelector(".bannerEdition");
+const modification = document.querySelector(".modification");
+const portfolioTitle = document.querySelector("#portfolio h2");
+
+// Si token existe, ce style apparait :
+
+if (tokenSave) {
+  bannerEdition.style.display = "flex";
+  buttonLogin.href = "";
+  buttonLogin.innerText = "logout";
+  filters.style.display = "none";
+  modification.style.display = "flex";
+  portfolioTitle.style.marginLeft = "6rem";
+
+  buttonLogin.addEventListener("click", () => {
+    tokenSave = localStorage.removeItem("token");
+  });
+}
