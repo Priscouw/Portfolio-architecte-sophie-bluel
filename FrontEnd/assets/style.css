@@ -322,6 +322,13 @@ nav img {
   margin: 2em 0 1em 0;
 }
 
+#login .errorMessage {
+  text-align: center;
+  margin-top: 1rem;
+  color: red;
+  font-size: 1rem;
+}
+
 #login a {
   text-decoration: underline;
 }

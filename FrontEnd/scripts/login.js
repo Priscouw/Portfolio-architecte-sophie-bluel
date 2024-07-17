@@ -21,9 +21,9 @@ async function fetchLogin() {
       window.localStorage.setItem("token", token);
       document.location.href = "./index.html";
     } else {
-      alert("Erreur dans l’identifiant ou le mot de passe");
+      const errorMessage = document.querySelector(".errorMessage");
+      errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
       mdp.value = "";
-      email.value = "";
     }
   } catch (error) {
     console.error("erreur lors de la requête :", error);
