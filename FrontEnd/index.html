@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div class="bannerEdition">
+	<div class="bannerEdition displayNone">
 		<i class="fa-regular fa-pen-to-square editionIcon"></i>
 		<p>Mode édition</p>
 	</div>
@@ -54,7 +54,7 @@
 		<section id="portfolio">
 			<div class="projetTitle">
 				<h2>Mes Projets</h2>
-				<div class="modification">
+				<div class="modification displayNone">
 					<i class="fa-regular fa-pen-to-square editionIcon"></i>
 					<p>modifier</p>
 				</div>
@@ -89,7 +89,48 @@
 			</ul>
 		</nav>
 	</footer>
+
+	<aside class="modalContainer displayNone" aria-hidden="true" role="dialog">
+		<div class=" modal" id="modal-1">
+
+			<i class="fa-solid fa-xmark crossIcon"></i>
+			<div class="containerInsideModal">
+				<h3>Galerie photo</h3>
+
+				<div class="containerWorks"></div>
+
+				<hr>
+				<button class="button buttonmodal">Ajouter une photo</button>
+			</div>
+		</div>
+
+		<div class="modal displayNone " id="modal-2">
+
+			<i class="fa-solid fa-arrow-left arrowIcon"></i>
+			<i class="fa-solid fa-xmark crossIcon"></i>
+
+			<div class="containerInsideModal">
+				<h3>Ajout photo</h3>
+
+				<form action="#">
+					<div class="containerAjoutPhoto">
+						<i class="fa-regular fa-image pictureIcon"></i>
+						<button>+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<label for="title">Titre</label>
+					<input type="text" id="title">
+					<label for="category">Catégorie</label>
+					<select id="category"></select>
+					<hr>
+					<button type="submit" class="button buttonmodal">Valider</button>
+				</form>
+			</div>
+		</div>
+	</aside>
+
 	<script src="./scripts/gallery.js"></script>
+	<script src="./scripts/modal.js"></script>
 </body>
 
 </html>
