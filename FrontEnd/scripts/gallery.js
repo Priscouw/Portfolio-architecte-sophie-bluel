@@ -102,11 +102,12 @@ const portfolioTitle = document.querySelector("#portfolio h2");
 // Si token existe, ce style apparait :
 
 if (tokenSave) {
-  bannerEdition.style.display = "flex";
   buttonLogin.href = "";
   buttonLogin.innerText = "logout";
-  filters.style.display = "none";
-  modification.style.display = "flex";
+  bannerEdition.classList.remove("displayNone");
+  modification.classList.remove("displayNone");
+  divFilters.classList.add("displayNone");
+
   portfolioTitle.style.marginLeft = "6rem";
 
   buttonLogin.addEventListener("click", () => {
