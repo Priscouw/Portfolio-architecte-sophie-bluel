@@ -28,7 +28,8 @@
 			<ul>
 				<li><a href="#">projets</a></li>
 				<li><a href="./index.html#contact">contact</a></li>
-				<li><a class="login" href="./login.html">login</a></li>
+				<li class="login"><a href="./login.html">login</a></li>
+				<li class="logout displayNone"><a href="#">logout</a></li>
 				<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
 			</ul>
 		</nav>
@@ -54,10 +55,10 @@
 		<section id="portfolio">
 			<div class="projetTitle">
 				<h2>Mes Projets</h2>
-				<div class="modification displayNone">
+				<button class="modification displayNone">
 					<i class="fa-regular fa-pen-to-square editionIcon"></i>
 					<p>modifier</p>
-				</div>
+				</button>
 			</div>
 			<div class="filters">
 				<button class="button buttonSelected" data-id="0">Tous</button>
@@ -91,9 +92,9 @@
 	</footer>
 
 	<aside class="modalContainer displayNone" aria-hidden="true" role="dialog">
-		<div class=" modal" id="modal-1">
-
-			<i class="fa-solid fa-xmark crossIcon"></i>
+		<div class="modal" id="modal-1">
+			<button class="closeButton">
+				<i class="fa-solid fa-xmark crossIcon"></i></button>
 			<div class="containerInsideModal">
 				<h3>Galerie photo</h3>
 
@@ -105,9 +106,13 @@
 		</div>
 
 		<div class="modal displayNone " id="modal-2">
+			<button class="returnButton">
+				<i class="fa-solid fa-arrow-left arrowIcon"></i>
+			</button>
+			<button class="closeButton">
 
-			<i class="fa-solid fa-arrow-left arrowIcon"></i>
-			<i class="fa-solid fa-xmark crossIcon"></i>
+				<i class="fa-solid fa-xmark crossIcon"></i>
+			</button>
 
 			<div class="containerInsideModal">
 				<h3>Ajout photo</h3>

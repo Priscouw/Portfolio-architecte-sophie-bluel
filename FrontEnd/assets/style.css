@@ -177,13 +177,19 @@ a:hover {
   color: #b1663c;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
 nav ul {
   display: flex;
   align-items: center;
   list-style-type: none;
+  gap: 3rem;
 }
 nav li {
-  padding: 0 30px;
   font-size: 1.2em;
 }
 
@@ -246,7 +252,6 @@ nav img {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  cursor: pointer;
 }
 
 .filters {
@@ -263,8 +268,6 @@ nav img {
   border-radius: 60px;
   border: #1d6154 1px solid;
   color: #1d6154;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 .buttonSelected {
@@ -394,12 +397,11 @@ footer nav ul {
   text-align: center;
 }
 
-.crossIcon {
+.closeButton {
   position: absolute;
   font-size: 1.2rem;
   top: 20px;
   right: 25px;
-  cursor: pointer;
 }
 
 hr {
@@ -419,7 +421,7 @@ hr {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-row-gap: 30px;
+  grid-row-gap: 10px;
   grid-column-gap: 10px;
   margin-bottom: 3rem;
 }
@@ -428,29 +430,28 @@ hr {
   width: 100%;
 }
 
-.trashIcon {
-  font-size: 10px;
+.deleteButton {
   position: relative;
-  bottom: 100px;
-  left: 55px;
+  bottom: 80%;
+  left: 70%;
   background-color: black;
   color: white;
-  padding: 4px;
   border-radius: 2px;
+  padding: 3px 4px;
+  font-size: 10px;
 }
 
-#modal-1 button {
+#modal-1 .buttonmodal {
   margin: 1rem auto;
 }
 
 /* Modale Ajout photo  */
 
-.arrowIcon {
+.returnButton {
   left: 26px;
   top: 25px;
   position: absolute;
   font-size: 1.5rem;
-  cursor: pointer;
 }
 
 .containerAjoutPhoto {
@@ -474,7 +475,6 @@ hr {
   color: #306685;
   font-weight: 500;
   font-size: 14px;
-  border: none;
   border-radius: 50px;
   background: #cbd6dc;
 }
@@ -491,17 +491,13 @@ hr {
   margin-bottom: 1rem;
 }
 
-.containerInsideModal input,
+.containerInsideModal input[type="text"],
 .containerInsideModal select {
   border: none;
-  padding: 1rem 0;
+  padding: 1rem;
   box-shadow: 0px 4px 14px 0px #00000017;
-  width: 100%;
-}
-
-#modal-2 input[type="submit"] {
-  background-color: #a7a7a7;
-  border: none;
+  font-family: "Work Sans";
+  font-size: 14px;
 }
 
 .displayNone {
