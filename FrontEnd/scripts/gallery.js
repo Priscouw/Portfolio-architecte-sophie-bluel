@@ -26,6 +26,7 @@ function afficherProjet(projet) {
     // Images des travaux
     const imgGallery = document.createElement("img");
     figureGallery.appendChild(imgGallery);
+    figureGallery.dataset.projet = projet[i].id;
     imgGallery.src = projet[i].imageUrl;
     imgGallery.alt = projet[i].title;
 
@@ -92,9 +93,10 @@ init();
 
 // Récupération du token
 
-const tokenSave = localStorage.getItem("token");
+let tokenSave = localStorage.getItem("token");
 
 const buttonLogin = document.querySelector(".login");
+const buttonLogout = document.querySelector(".logout");
 const bannerEdition = document.querySelector(".bannerEdition");
 const modification = document.querySelector(".modification");
 const portfolioTitle = document.querySelector("#portfolio h2");
@@ -102,15 +104,23 @@ const portfolioTitle = document.querySelector("#portfolio h2");
 // Si token existe, ce style apparait :
 
 if (tokenSave) {
-  buttonLogin.href = "";
-  buttonLogin.innerText = "logout";
+  buttonLogin.classList.add("displayNone");
+  buttonLogout.classList.remove("displayNone");
   bannerEdition.classList.remove("displayNone");
   modification.classList.remove("displayNone");
   divFilters.classList.add("displayNone");
 
   portfolioTitle.style.marginLeft = "6rem";
 
-  buttonLogin.addEventListener("click", () => {
+  // Quand on clique sur le bouton, le token se supprime et le style d'avant revient
+
+  buttonLogout.addEventListener("click", () => {
     tokenSave = localStorage.removeItem("token");
+    buttonLogin.classList.remove("displayNone");
+    buttonLogout.classList.add("displayNone");
+    bannerEdition.classList.add("displayNone");
+    modification.classList.add("displayNone");
+    divFilters.classList.remove("displayNone");
+    portfolioTitle.style.marginLeft = "";
   });
 }
