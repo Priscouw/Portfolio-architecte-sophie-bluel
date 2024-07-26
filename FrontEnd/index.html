@@ -101,7 +101,7 @@
 				<div class="containerWorks"></div>
 
 				<hr>
-				<button class="button buttonmodal">Ajouter une photo</button>
+				<button class="button buttonModalActive">Ajouter une photo</button>
 			</div>
 		</div>
 
@@ -117,18 +117,23 @@
 			<div class="containerInsideModal">
 				<h3>Ajout photo</h3>
 
-				<form action="#">
-					<div class="containerAjoutPhoto">
-						<i class="fa-regular fa-image pictureIcon"></i>
-						<button>+ Ajouter photo</button>
-						<p>jpg, png : 4mo max</p>
+				<form id="formAddNewWorks" action="#">
+					<div class="containerFormPhoto">
+						<div class="containerAddPhoto">
+							<i class="fa-regular fa-image pictureIcon"></i>
+							<input type="file" id="fileInput" accept=".png, .jpg" class="displayNone" required>
+							<label for="fileInput" class="buttonAddPicture">+ Ajouter photo</label>
+							<p class="fileTypeSize">jpg, png : 4mo max</p>
+						</div>
+						<img class="formPhotoUpload displayNone" src="#">
+
 					</div>
 					<label for="title">Titre</label>
-					<input type="text" id="title">
+					<input type="text" id="title" required>
 					<label for="category">Catégorie</label>
 					<select id="category"></select>
 					<hr>
-					<button type="submit" class="button buttonmodal">Valider</button>
+					<button type="submit" class="button buttonModalDisable" id="formButtonAddNewWorks">Valider</button>
 				</form>
 			</div>
 		</div>
