@@ -2,13 +2,13 @@
 const modalContainer = document.querySelector(".modalContainer");
 const modalGalerie = document.getElementById("modal-1");
 const containerWorks = document.querySelector(".containerWorks");
-const buttonModalGalerie = document.querySelector("#modal-1 .buttonmodal");
+const buttonModalGalerie = document.querySelector("#modal-1 .button");
 const modalAjoutPhoto = document.getElementById("modal-2");
 const closeButtons = document.querySelectorAll(".closeButton");
 const returnButton = document.querySelector(".returnButton");
 
 // Quand on clique sur modifier la modale s'ouvre
-modification.addEventListener("click", async () => {
+modification.addEventListener("click", () => {
   modalContainer.classList.remove("displayNone");
 
   //condition mise pour que la modale affichée soit toujours la première
@@ -16,18 +16,15 @@ modification.addEventListener("click", async () => {
     modalAjoutPhoto.classList.add("displayNone");
     modalGalerie.classList.remove("displayNone");
   }
-  await recuperationWorks();
   addListenerToModalAjoutPhoto();
   addListenerToModalGalerie();
   closeModals();
-  selectCategoriesForm();
-  deleteWorks();
+  addPhotoForm();
 });
 
 // Récupération des images dans l'API pour modale galerie
-async function recuperationWorks() {
+function recuperationWorks(works) {
   containerWorks.innerHTML = "";
-  const works = await fetchWorks();
 
   works.forEach((work) => {
     // création d'un container pour chaque projet
@@ -58,6 +55,7 @@ function addListenerToModalAjoutPhoto() {
   buttonModalGalerie.addEventListener("click", () => {
     modalGalerie.classList.add("displayNone");
     modalAjoutPhoto.classList.remove("displayNone");
+    resetFormAddPhoto();
   });
 }
 
@@ -86,17 +84,18 @@ function closeModals() {
 }
 
 // Coté suppression
+
 function deleteWorks() {
   const deleteButtons = document.querySelectorAll(".deleteButton");
   deleteButtons.forEach((deleteButton) => {
     deleteButton.addEventListener("click", (e) => {
       const id = e.currentTarget.dataset.trashId;
-      fetchDeleteWorks(id);
+      sendApiDeleteWorks(id);
     });
   });
 }
 
-async function fetchDeleteWorks(id) {
+async function sendApiDeleteWorks(id) {
   const tokenSave = localStorage.getItem("token");
   try {
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -109,11 +108,13 @@ async function fetchDeleteWorks(id) {
 
     if (response.ok) {
       const works = await fetchWorks();
-      console.log("Photo supprimé avec succès");
+      console.log("Projet supprimé avec succès");
       afficherProjet(works);
-      recuperationWorks();
+      recuperationWorks(works);
+      //réinitialise la fonction
+      deleteWorks();
     } else {
-      console.error("Erreur lors de la suppression de la photo");
+      console.error("Erreur lors de la suppression du projet");
     }
   } catch (error) {
     console.error("Erreur lors de la requête :", error);
@@ -122,11 +123,48 @@ async function fetchDeleteWorks(id) {
 
 // Partie envoi d'un nouveau projet
 
-// Choix des categories dans modale ajout photo
-async function selectCategoriesForm() {
-  const categories = await fetchCategories();
-  const selectCategories = document.getElementById("category");
+// Récupération des éléments du formulaire
+const formAddNewWorks = document.getElementById("formAddNewWorks");
+const containerAddPhoto = document.querySelector(".containerAddPhoto");
+const formPhotoUpload = document.querySelector(".formPhotoUpload");
+const fileInput = document.getElementById("fileInput");
+const addTitle = document.getElementById("title");
+const selectCategories = document.getElementById("category");
+const formButtonAddNewWorks = document.getElementById("formButtonAddNewWorks");
+const errorMessagePhoto = document.querySelector(".fileTypeSize");
 
+// Ajout d'une photo dans le formulaire
+
+function addPhotoForm() {
+  fileInput.addEventListener("change", (e) => {
+    const file = fileInput.files[0];
+    if (
+      file &&
+      (file.type === "image/jpeg" || file.type === "image/png") &&
+      file.size <= 4 * 1024 * 1024
+    ) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        containerAddPhoto.classList.add("displayNone");
+        formPhotoUpload.src = e.target.result;
+        formPhotoUpload.classList.remove("displayNone");
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      errorMessagePhoto.innerText =
+        "Veuillez sélectionner une image JPG ou PNG de moins de 4 Mo";
+      errorMessagePhoto.classList.add("errorMessage");
+    }
+  });
+}
+
+// formButton.classList.remove("buttonModalDisable");
+// formButton.classList.add("buttonModalActive");
+
+// Choix des categories dans modale ajout photo
+function selectCategoriesForm(categories) {
   selectCategories.innerHTML = "";
   categories.forEach((category) => {
     const optionCategory = document.createElement("option");
@@ -136,18 +174,46 @@ async function selectCategoriesForm() {
   });
 }
 
+// Envoi du formulaire
+
+// formAddNewWorks.addEventListener("submit", () => {
+//   fetchSendWorks();
+// });
+
 // async function fetchSendWorks() {
 //   try {
-//      await fetch("http://localhost:5678/api/users/works", {
+//     await fetch("http://localhost:5678/api/users/works/", {
 //       method: "POST",
-//       headers: { "Content-Type": "multipart/form-data" },
-//       body: JSON.stringify({
-//         image: ,
-//         title: title.value,
-//         category: selectCategories.value ,
-//       }),
+//       headers: {
+//         Authorization: `Bearer ${tokenSave}`,
+//         "Content-Type": "application/json",
+//       },
+//       body: new FormData(formAddNewWorks),
 //     });
-//       } catch (error) {
+
+//     //     if (response.ok) {
+//     //       const works = await fetchWorks();
+//     //       console.log("Photo envoyé avec succès");
+//     //       afficherProjet(works);
+//     //       recuperationWorks(works);
+//     //     } else {
+//     //       console.error("Erreur lors de l'envoi du projet'");
+//     // }
+//   } catch (error) {
 //     console.error("erreur lors de la requête :", error);
 //   }
 // }
+
+// Si il y'a un titre une catégorie et une photo le bouton change de couleur
+
+// reinitialise les changements du formulaire ajout photo
+
+function resetFormAddPhoto() {
+  fileInput.value = "";
+  addTitle.value = "";
+  containerAddPhoto.classList.remove("displayNone");
+  formPhotoUpload.src = "";
+  formPhotoUpload.classList.add("displayNone");
+  errorMessagePhoto.innerText = "jpg, png : 4mo max";
+  errorMessagePhoto.classList.remove("errorMessage");
+}
