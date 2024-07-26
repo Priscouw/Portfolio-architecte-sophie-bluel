@@ -26,7 +26,6 @@ function afficherProjet(projet) {
     // Images des travaux
     const imgGallery = document.createElement("img");
     figureGallery.appendChild(imgGallery);
-    figureGallery.dataset.projet = projet[i].id;
     imgGallery.src = projet[i].imageUrl;
     imgGallery.alt = projet[i].title;
 
@@ -79,9 +78,12 @@ async function init() {
   try {
     const works = await fetchWorks();
     afficherProjet(works);
+    recuperationWorks(works);
+    deleteWorks();
 
     const categories = await fetchCategories();
     createCategoryButtons(categories);
+    selectCategoriesForm(categories);
 
     filterButtons(works);
   } catch (error) {
