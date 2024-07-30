@@ -11,7 +11,7 @@
 		rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		crossorigin="anonymous" referrerpolicy="no-referrer">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -55,10 +55,10 @@
 		<section id="portfolio">
 			<div class="projetTitle">
 				<h2>Mes Projets</h2>
-				<button class="modification displayNone">
+				<a class="modification displayNone">
 					<i class="fa-regular fa-pen-to-square editionIcon"></i>
 					<p>modifier</p>
-				</button>
+				</a>
 			</div>
 			<div class="filters">
 				<button class="button buttonSelected" data-id="0">Tous</button>
@@ -91,7 +91,7 @@
 		</nav>
 	</footer>
 
-	<aside class="modalContainer displayNone" aria-hidden="true" role="dialog">
+	<aside class="modalContainer displayNone">
 		<div class="modal" id="modal-1">
 			<button class="closeButton">
 				<i class="fa-solid fa-xmark crossIcon"></i></button>
@@ -117,21 +117,21 @@
 			<div class="containerInsideModal">
 				<h3>Ajout photo</h3>
 
-				<form id="formAddNewWorks" action="#">
+				<form id="formAddNewWorks">
 					<div class="containerFormPhoto">
 						<div class="containerAddPhoto">
 							<i class="fa-regular fa-image pictureIcon"></i>
-							<input type="file" id="fileInput" accept=".png, .jpg" class="displayNone" required>
+							<input name="image" type="file" id="fileInput" accept=".png, .jpg" class="displayNone">
 							<label for="fileInput" class="buttonAddPicture">+ Ajouter photo</label>
 							<p class="fileTypeSize">jpg, png : 4mo max</p>
 						</div>
-						<img class="formPhotoUpload displayNone" src="#">
+						<img class="formPhotoUpload displayNone" src="#" alt="">
 
 					</div>
 					<label for="title">Titre</label>
-					<input type="text" id="title" required>
+					<input name="title" type="text" id="title" required>
 					<label for="category">Catégorie</label>
-					<select id="category"></select>
+					<select name="category" id="category"></select>
 					<hr>
 					<button type="submit" class="button buttonModalDisable" id="formButtonAddNewWorks">Valider</button>
 				</form>
