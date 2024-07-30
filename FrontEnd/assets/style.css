@@ -129,21 +129,25 @@ table {
 }
 /** end reset css**/
 body {
-  max-width: 1140px;
-  margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
   background-color: #fffef8;
 }
 
 header {
+  max-width: 1140px;
   display: flex;
   justify-content: space-between;
-  margin: 40px 0;
+  margin: 40px auto;
+}
+
+main {
+  max-width: 1140px;
+  margin: auto;
 }
 
 section {
-  margin: 50px 0;
+  margin: 50px auto;
 }
 
 h1 {
@@ -208,8 +212,6 @@ nav img {
   color: white;
   padding: 1rem 0;
   gap: 0.5rem;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
 }
 
 #introduction {
@@ -249,6 +251,7 @@ nav img {
 }
 
 .modification {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -285,7 +288,9 @@ nav img {
 }
 
 .gallery img {
+  height: 407px;
   width: 100%;
+  object-fit: cover;
 }
 #contact,
 #login {
@@ -351,7 +356,7 @@ input[type="submit"] {
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  padding: 1em;
+  padding: 2em 6em;
 }
 
 /* Partie modale */
@@ -429,6 +434,8 @@ hr {
 }
 
 .containerWorks img {
+  object-fit: cover;
+  height: 103px;
   width: 100%;
 }
 
