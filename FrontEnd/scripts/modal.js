@@ -124,7 +124,7 @@ async function sendApiDeleteWorks(id) {
 // Partie envoi d'un nouveau projet
 
 // Récupération des éléments du formulaire
-const formAddNewWorks = document.getElementById("formAddNewWorks");
+
 const containerAddPhoto = document.querySelector(".containerAddPhoto");
 const formPhotoUpload = document.querySelector(".formPhotoUpload");
 const fileInput = document.getElementById("fileInput");
@@ -132,6 +132,7 @@ const addTitle = document.getElementById("title");
 const selectCategories = document.getElementById("category");
 const formButtonAddNewWorks = document.getElementById("formButtonAddNewWorks");
 const errorMessagePhoto = document.querySelector(".fileTypeSize");
+const errorMessageForm = document.querySelector(".errorMessageForm");
 
 // Ajout d'une photo dans le formulaire
 
@@ -140,7 +141,7 @@ function addPhotoForm() {
     const file = fileInput.files[0];
     if (
       file &&
-      (file.type === "image/jpeg" || file.type === "image/png") &&
+      (file.type === "image/jpg" || file.type === "image/png") &&
       file.size <= 4 * 1024 * 1024
     ) {
       const reader = new FileReader();
@@ -160,53 +161,7 @@ function addPhotoForm() {
   });
 }
 
-// formButton.classList.remove("buttonModalDisable");
-// formButton.classList.add("buttonModalActive");
-
-// Choix des categories dans modale ajout photo
-function selectCategoriesForm(categories) {
-  selectCategories.innerHTML = "";
-  categories.forEach((category) => {
-    const optionCategory = document.createElement("option");
-    optionCategory.value = category.name;
-    optionCategory.innerText = category.name;
-    selectCategories.appendChild(optionCategory);
-  });
-}
-
-// Envoi du formulaire
-
-// formAddNewWorks.addEventListener("submit", () => {
-//   fetchSendWorks();
-// });
-
-// async function fetchSendWorks() {
-//   try {
-//     await fetch("http://localhost:5678/api/users/works/", {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Bearer ${tokenSave}`,
-//         "Content-Type": "application/json",
-//       },
-//       body: new FormData(formAddNewWorks),
-//     });
-
-//     //     if (response.ok) {
-//     //       const works = await fetchWorks();
-//     //       console.log("Photo envoyé avec succès");
-//     //       afficherProjet(works);
-//     //       recuperationWorks(works);
-//     //     } else {
-//     //       console.error("Erreur lors de l'envoi du projet'");
-//     // }
-//   } catch (error) {
-//     console.error("erreur lors de la requête :", error);
-//   }
-// }
-
-// Si il y'a un titre une catégorie et une photo le bouton change de couleur
-
-// reinitialise les changements du formulaire ajout photo
+// reinitialise le formulaire ajout photo
 
 function resetFormAddPhoto() {
   fileInput.value = "";
@@ -216,4 +171,77 @@ function resetFormAddPhoto() {
   formPhotoUpload.classList.add("displayNone");
   errorMessagePhoto.innerText = "jpg, png : 4mo max";
   errorMessagePhoto.classList.remove("errorMessage");
+  errorMessageForm.innerText = "";
+}
+
+// Choix des categories dans modale ajout photo
+function selectCategoriesForm(categories) {
+  selectCategories.innerHTML = "";
+  categories.forEach((category) => {
+    const optionCategory = document.createElement("option");
+    optionCategory.value = category.id;
+    optionCategory.innerText = category.name;
+    selectCategories.appendChild(optionCategory);
+  });
+}
+
+// Envoi du formulaire
+
+const formAddNewWorks = document.getElementById("formAddNewWorks");
+
+function sendNewWorks() {
+  formAddNewWorks.addEventListener("input", () => {
+    if (
+      fileInput.value !== "" &&
+      addTitle.value !== "" &&
+      selectCategories.value !== ""
+    ) {
+      formButtonAddNewWorks.classList.add("buttonModalActive");
+      formButtonAddNewWorks.classList.remove("buttonModalDisable");
+    } else {
+      formButtonAddNewWorks.classList.remove("buttonModalActive");
+      formButtonAddNewWorks.classList.add("buttonModalDisable");
+    }
+  });
+
+  formAddNewWorks.addEventListener("submit", (e) => {
+    if (
+      fileInput.value !== "" &&
+      addTitle.value !== "" &&
+      selectCategories.value !== ""
+    ) {
+      e.preventDefault();
+      fetchSendWorks();
+    } else {
+      e.preventDefault();
+      errorMessageForm.innerText = "Veuillez remplir tous les champs";
+      errorMessageForm.classList.add("errorMessage");
+    }
+  });
+}
+
+async function fetchSendWorks() {
+  const formData = new FormData(formAddNewWorks);
+  try {
+    const response = await fetch("http://localhost:5678/api/works/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${tokenSave}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      const works = await fetchWorks();
+      console.log("Projet envoyé avec succès");
+      afficherProjet(works);
+      recuperationWorks(works);
+      modalContainer.classList.add("displayNone");
+      deleteWorks();
+    } else {
+      console.error("Erreur lors de l'envoi du projet'");
+    }
+  } catch (error) {
+    console.error("erreur lors de la requête :", error);
+  }
 }
