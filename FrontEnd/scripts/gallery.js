@@ -80,6 +80,7 @@ async function init() {
     afficherProjet(works);
     recuperationWorks(works);
     deleteWorks();
+    sendNewWorks();
 
     const categories = await fetchCategories();
     createCategoryButtons(categories);
@@ -93,7 +94,7 @@ async function init() {
 
 init();
 
-// Récupération du token
+// Partie quand Token récupéré
 
 let tokenSave = localStorage.getItem("token");
 
@@ -118,11 +119,12 @@ if (tokenSave) {
 
   buttonLogout.addEventListener("click", () => {
     tokenSave = localStorage.removeItem("token");
-    buttonLogin.classList.remove("displayNone");
-    buttonLogout.classList.add("displayNone");
-    bannerEdition.classList.add("displayNone");
-    modification.classList.add("displayNone");
-    divFilters.classList.remove("displayNone");
-    portfolioTitle.style.marginLeft = "";
+    // buttonLogin.classList.remove("displayNone");
+    // buttonLogout.classList.add("displayNone");
+    // bannerEdition.classList.add("displayNone");
+    // modification.classList.add("displayNone");
+    // divFilters.classList.remove("displayNone");
+    // portfolioTitle.style.marginLeft = "";
+    location.reload();
   });
 }
