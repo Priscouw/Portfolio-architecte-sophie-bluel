@@ -172,6 +172,8 @@ function resetFormAddPhoto() {
   errorMessagePhoto.innerText = "jpg, png : 4mo max";
   errorMessagePhoto.classList.remove("errorMessage");
   errorMessageForm.innerText = "";
+  formButtonAddNewWorks.classList.remove("buttonModalActive");
+  formButtonAddNewWorks.classList.add("buttonModalDisable");
 }
 
 // Choix des categories dans modale ajout photo
